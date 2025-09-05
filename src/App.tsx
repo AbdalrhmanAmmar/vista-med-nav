@@ -14,11 +14,9 @@ const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <ThemeProvider defaultTheme="light" storageKey="medical-rep-theme">
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
+    <BrowserRouter>
+      <ThemeProvider defaultTheme="light" storageKey="medical-rep-theme">
+        <TooltipProvider>
           <SidebarProvider defaultOpen={true}>
             <div className="min-h-screen flex w-full">
               <AppSidebar />
@@ -41,16 +39,17 @@ const App = () => (
                     <Route path="/evaluations" element={<Dashboard />} />
                     <Route path="/management" element={<Dashboard />} />
                     <Route path="/users" element={<Dashboard />} />
-                    {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                     <Route path="*" element={<NotFound />} />
                   </Routes>
                 </main>
               </SidebarInset>
             </div>
           </SidebarProvider>
-        </BrowserRouter>
-      </TooltipProvider>
-    </ThemeProvider>
+          <Toaster />
+          <Sonner />
+        </TooltipProvider>
+      </ThemeProvider>
+    </BrowserRouter>
   </QueryClientProvider>
 );
 

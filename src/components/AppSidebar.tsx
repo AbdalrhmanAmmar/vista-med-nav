@@ -30,18 +30,18 @@ import {
 import { Button } from "@/components/ui/button";
 
 const menuItems = [
-  { title: "الصفحة الرئيسية", url: "/", icon: Home },
-  { title: "لوحات التحكم", url: "/dashboards", icon: BarChart3 },
-  { title: "التقارير", url: "/reports", icon: FileText },
-  { title: "الزيارات", url: "/visits", icon: Users },
-  { title: "الطلبات", url: "/orders", icon: ShoppingCart },
-  { title: "التحصيلات", url: "/collections", icon: DollarSign },
-  { title: "التقييمات", url: "/evaluations", icon: Star },
+  { id: "home", title: "الصفحة الرئيسية", url: "/", icon: Home },
+  { id: "dashboards", title: "لوحات التحكم", url: "/dashboards", icon: BarChart3 },
+  { id: "reports", title: "التقارير", url: "/reports", icon: FileText },
+  { id: "visits", title: "الزيارات", url: "/visits", icon: Users },
+  { id: "orders", title: "الطلبات", url: "/orders", icon: ShoppingCart },
+  { id: "collections", title: "التحصيلات", url: "/collections", icon: DollarSign },
+  { id: "evaluations", title: "التقييمات", url: "/evaluations", icon: Star },
 ];
 
 const managementItems = [
-  { title: "الإدارة العامة", url: "/management", icon: Settings },
-  { title: "إدارة المستخدمين", url: "/users", icon: UserCog },
+  { id: "management", title: "الإدارة العامة", url: "/management", icon: Settings },
+  { id: "users", title: "إدارة المستخدمين", url: "/users", icon: UserCog },
 ];
 
 export function AppSidebar() {
@@ -59,17 +59,17 @@ export function AppSidebar() {
   return (
     <Sidebar collapsible="icon">
       <SidebarHeader className="p-4">
-        {!isCollapsed && (
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 bg-gradient-medical rounded-lg flex items-center justify-center">
-              <Users className="w-5 h-5 text-white" />
-            </div>
+        <div className="flex items-center gap-3">
+          <div className="w-8 h-8 bg-gradient-medical rounded-lg flex items-center justify-center">
+            <Users className="w-5 h-5 text-white" />
+          </div>
+          {!isCollapsed && (
             <div>
               <h2 className="text-lg font-bold text-sidebar-foreground">نظام المندوبين</h2>
               <p className="text-sm text-sidebar-foreground/70">الطبيين</p>
             </div>
-          </div>
-        )}
+          )}
+        </div>
       </SidebarHeader>
 
       <SidebarContent>
@@ -78,7 +78,7 @@ export function AppSidebar() {
           <SidebarGroupContent>
             <SidebarMenu>
               {menuItems.map((item) => (
-                <SidebarMenuItem key={item.title}>
+                <SidebarMenuItem key={item.id}>
                   <SidebarMenuButton asChild>
                     <NavLink 
                       to={item.url} 
@@ -101,7 +101,7 @@ export function AppSidebar() {
           <SidebarGroupContent>
             <SidebarMenu>
               {managementItems.map((item) => (
-                <SidebarMenuItem key={item.title}>
+                <SidebarMenuItem key={item.id}>
                   <SidebarMenuButton asChild>
                     <NavLink 
                       to={item.url} 
@@ -121,34 +121,25 @@ export function AppSidebar() {
       </SidebarContent>
 
       <SidebarFooter className="p-4">
-        {!isCollapsed ? (
-          <Button
-            variant="outline"
-            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-            className="w-full justify-start"
-            style={{ direction: 'rtl' }}
-          >
-            {theme === "dark" ? (
-              <>
-                <Sun className="ml-2 h-4 w-4" />
-                الوضع النهاري
-              </>
-            ) : (
-              <>
-                <Moon className="ml-2 h-4 w-4" />
-                الوضع الليلي
-              </>
-            )}
-          </Button>
-        ) : (
-          <Button
-            variant="outline"
-            size="icon"
-            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-          >
-            {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
-          </Button>
-        )}
+        <Button
+          variant="outline"
+          onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+          className={`${!isCollapsed ? "w-full justify-start" : "w-10 h-10"}`}
+          style={!isCollapsed ? { direction: 'rtl' } : {}}
+          size={isCollapsed ? "icon" : "default"}
+        >
+          {theme === "dark" ? (
+            <>
+              <Sun className={`h-4 w-4 ${!isCollapsed ? "ml-2" : ""}`} />
+              {!isCollapsed && <span>الوضع النهاري</span>}
+            </>
+          ) : (
+            <>
+              <Moon className={`h-4 w-4 ${!isCollapsed ? "ml-2" : ""}`} />
+              {!isCollapsed && <span>الوضع الليلي</span>}
+            </>
+          )}
+        </Button>
       </SidebarFooter>
     </Sidebar>
   );
