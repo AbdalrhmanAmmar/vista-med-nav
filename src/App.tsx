@@ -19,13 +19,12 @@ const App = () => (
         <TooltipProvider>
           <SidebarProvider defaultOpen={true}>
             <div className="min-h-screen flex w-full">
-              <AppSidebar />
               <SidebarInset>
                 <header className="h-14 flex items-center border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-                  <SidebarTrigger className="ml-4" />
                   <div className="flex items-center gap-2 px-4" style={{ direction: 'rtl' }}>
                     <h1 className="text-lg font-semibold text-foreground">نظام إدارة المندوبين الطبيين</h1>
                   </div>
+                  <SidebarTrigger className="mr-4 ml-auto" />
                 </header>
                 
                 <main className="flex-1 p-6 overflow-auto">
@@ -43,6 +42,7 @@ const App = () => (
                   </Routes>
                 </main>
               </SidebarInset>
+              <AppSidebar />
             </div>
           </SidebarProvider>
           <Toaster />

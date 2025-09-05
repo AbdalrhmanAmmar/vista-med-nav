@@ -57,7 +57,7 @@ export function AppSidebar() {
     isActive ? "bg-sidebar-accent text-sidebar-primary font-medium" : "hover:bg-sidebar-accent/50";
 
   return (
-    <Sidebar collapsible="icon">
+    <Sidebar side="right" collapsible="offcanvas">
       <SidebarHeader className="p-4">
         <div className="flex items-center gap-3">
           <div className="w-8 h-8 bg-gradient-medical rounded-lg flex items-center justify-center">
